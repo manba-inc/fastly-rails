@@ -3,5 +3,4 @@ before_script: 'bundle exec rake test:setup'
 script: 'bundle exec rake test:all'
 cache: bundler
 rvm:
-  - 2.3.3
-  - 2.2.2
+  - 3.3.0

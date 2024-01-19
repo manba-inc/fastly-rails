@@ -39,9 +39,8 @@ class FastlyHeadersTest < ActionDispatch::IntegrationTest
   end
 
   test 'POST /books should not have fastly headers/ fastly header values' do
-
     assert_difference('Book.count') do
-      post '/books', 'book' => { 'name' => 'some new book' }
+      post '/books', params: { book: { name: 'some new book'}}
     end
 
     assert_nil request.session_options[:skip]
@@ -57,7 +56,7 @@ class FastlyHeadersTest < ActionDispatch::IntegrationTest
 
     create :book, :id => 1, :name => 'some new book'
 
-    put '/books/1', 'id' => 1, 'book' => { 'name' => 'changed book' }
+    put '/books/1', params: { book: { id: 1, name: 'changed book'}}
 
     assert_equal 'changed book', Book.find(1).name
 

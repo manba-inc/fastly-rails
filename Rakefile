@@ -22,13 +22,13 @@ Bundler::GemHelper.install_tasks
 namespace :test do
   desc 'Install dependencies for all tests with appraisal'
   task :setup do
-    sh 'bin/rails db:environment:set RAILS_ENV=test 2>&1 >/dev/null || exit 0'
-    sh 'appraisal install'
+    sh 'bundle exec appraisal install'
   end
 
   desc 'Run all tests with appraisal'
   task :all do
-    sh 'appraisal rake test'
+    sh 'bundle exec appraisal install'
+    sh 'bundle exec appraisal rake test'
   end
 end
 
@@ -40,6 +40,5 @@ Rake::TestTask.new(:test) do |t|
   t.pattern = 'test/**/*_test.rb'
   t.verbose = false
 end
-
 
 task default: :test

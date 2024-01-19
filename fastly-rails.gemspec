@@ -15,11 +15,11 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "railties", '> 2', '< 8'
-  s.add_dependency 'fastly', '~> 1.6'
+  s.add_dependency 'fastly', '~> 3.0.0'
 
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "database_cleaner"
-  s.add_development_dependency "factory_girl_rails"
+  s.add_development_dependency "database_cleaner-active_record"
+  s.add_development_dependency "factory_bot"
   s.add_development_dependency "ffaker"
   s.add_development_dependency "minitest-spec-rails"
   s.add_development_dependency "appraisal"

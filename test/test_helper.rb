@@ -3,16 +3,12 @@ ENV["RAILS_ENV"] = "test"
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "rails/test_help"
+require "minitest/unit"
 require "minitest/autorun"
-require 'database_cleaner'
+require 'database_cleaner/active_record'
 require 'ffaker'
-require 'factory_girl_rails'
+require 'factory_bot'
 require 'webmock/minitest'
-
-begin
-  require 'rails-controller-testing'
-rescue LoadError
-end
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -27,10 +23,10 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 #   ActiveSupport::TestCase.fixtures :all
 # end
 
-ActiveRecord::Migrator.migrate File.expand_path('../dummy/db/migrate/', __FILE__)
+ActiveRecord::MigrationContext.new("db/migrate/", ActiveRecord::SchemaMigration).migrate
 
 class Minitest::Spec
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 
   before :each do
     stub_request(:any, "https://api.fastly.com/login").
@@ -44,7 +40,7 @@ class Minitest::Spec
     )
 
     WebMock.disable_net_connect!
-
+    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start
   end
 
@@ -55,12 +51,12 @@ class Minitest::Spec
 end
 
 class ActionController::TestCase
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 end
 
 class ActionDispatch::IntegrationTest
   include WebMock::API
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 
   def setup
     stub_request(:any, /.*/).

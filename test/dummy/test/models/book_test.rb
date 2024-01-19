@@ -8,10 +8,11 @@ require 'test_helper'
 
 describe Book do
 
-  let (:book) { create :book, id: 1 }
+  let (:book) {
+    FactoryBot.create(:book, id: 1)
+  }
 
   it "should have Fastly::SurrogateKey instance methods" do
-
     [:record_key, :table_key, :purge, :purge_all, :soft_purge, :soft_purge_all].each do |method|
       assert_respond_to book, method
     end

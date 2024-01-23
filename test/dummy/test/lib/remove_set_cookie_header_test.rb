@@ -28,7 +28,7 @@ describe FastlyRails::Rack::RemoveSetCookieHeader do
   end
 
   it "keeps 'set-cookie' if no 'surrogate-control' or 'surrogate-key'" do
-    headers = { "Set-Cookie" => "yes!!" }
+    headers = { "Set-Cookie" => "yes=!!" }
 
     app = Rack::Builder.new do
       use FastlyRails::Rack::RemoveSetCookieHeader
@@ -38,6 +38,6 @@ describe FastlyRails::Rack::RemoveSetCookieHeader do
     env = Rack::MockRequest.env_for('/')
     response = Rack::MockResponse.new(*app.call(env))
 
-    assert_equal response.headers['Set-Cookie'], "yes!!"
+    assert_equal response.headers['Set-Cookie'], "yes=!!"
   end
 end

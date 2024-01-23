@@ -3,8 +3,12 @@ log/*.log
 pkg/
 test/dummy/db/*.sqlite3
 test/dummy/db/*.sqlite3-journal
+test/dummy/db/test.sqlite3-shm
+test/dummy/db/test.sqlite3-wal
 test/dummy/log/*.log
 test/dummy/tmp/
 test/dummy/.sass-cache
 gemfiles/*.lock
 Gemfile.lock
+gemfiles/vendor/
+vendor

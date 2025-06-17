@@ -4,3 +4,9 @@ script: 'bundle exec rake test:all'
 cache: bundler
 rvm:
   - 3.3.0
+  - 3.4.0
+  - 3.4.1
+
+gemfile:
+  - gemfiles/rails_7_1.gemfile
+  - gemfiles/rails_8_0.gemfile
